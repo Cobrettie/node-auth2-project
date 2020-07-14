@@ -24,13 +24,6 @@ server.use((err, req, res, next) => {
 
 server.use(usersRouter)
 
-// server.get('/', (req, res) => {
-//   res.status(401).json({
-//     message: "get req running"
-//   })
-// })
-
-
 server.listen(port, () => {
   console.log(`Server running at localhost ${port}`)
 })
