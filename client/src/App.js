@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import './App.css';
 
-// fetch('http://localhost:5000/')
-//   .then(response => console.log(response))
-//   .catch(err => console.log(err))
-
 function SignUp() {
   const [credentials, setCredentials] = useState({
     username: '',
@@ -20,15 +16,19 @@ function SignUp() {
     })
   }
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
 
-    fetch('http://localhost:5000/register')
+    await axios.post('http://localhost:5000/register', credentials)
       .then(response => {
-        return <h2>Account registered!</h2>
+        if (response) {
+          console.log(response)
+        } else {
+          return <h2>sorry</h2>
+        }
       })
       .catch(err => {
-        console.log('Error: ', err)
+        console.log(err)
       })
   }
 
@@ -45,7 +45,7 @@ function SignUp() {
           />
 
           <input 
-            type='text'
+            type='password'
             name='password'
             onChange={onChange}
             value={credentials.password}
@@ -58,6 +58,8 @@ function SignUp() {
             onChange={onChange}
             placeholder='department'
           />
+
+          <button type='submit'>Submit</button>
         </form>
       </div>
     </div>

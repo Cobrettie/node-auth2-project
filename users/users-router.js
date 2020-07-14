@@ -27,7 +27,7 @@ router.get('/users', restrict(), async (req, res) => {
   try {
     const { department } = req.body
     const users = await Users.getUsersByDepartment(department)
-    res.status(401).json(users)
+    res.status(201).json(users)
   } catch(err) {
     logError(err)
   }
@@ -50,7 +50,7 @@ router.post('/register', async (req, res) => {
       password: await bcrypt.hash(password, 14),
       department
     })
-    res.status(401).json(newUser)
+    res.status(201).json(newUser)
 
   } catch(err) {
     logError(err)
