@@ -6,10 +6,10 @@ const restrict = require("../middleware/restrict")
 require("dotenv").config(); // for reading JWT_SECRET from .env file
 
 function logError(err) {
-  console.log("Error: ", err)
+  console.log("You shall not pass", err)
 }
 
-router.get('/users', async (req, res) => {
+router.get('/users', restrict(), async (req, res) => {
   try {
     const allUsers = await Users.getUsers()
     res.status(401).json(allUsers)
