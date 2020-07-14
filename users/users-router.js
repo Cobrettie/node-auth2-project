@@ -18,6 +18,33 @@ router.get('/users', async (req, res) => {
   }
 })
 
+router.post('/register', async (req, res) => {
+  try {
+    const { username, password, department } = req.body
+    const user = await Users.findBy({ username }).first()
+
+    if (user) {
+      return res.status(409).json({
+        message: "Username is already taken"
+      })
+    }
+
+    const newUser = await Users.addUser({
+      username,
+      password: await bcrypt.hash(password, 14),
+      department
+    })
+    res.status(401).json(newUser)
+
+  } catch (err) {
+    logError(err)
+  }
+})
+
+router.post('/login', (req, res) => {
+  
+})
+
 
 
 module.exports = router

@@ -4,7 +4,7 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const usersRouter = require("./users/users-router.js")
 
-const restrict = require("./middleware/restrict.js")
+// const restrict = require("./middleware/restrict.js")
 
 const server = express()
 const port = process.env.PORT || 5000
