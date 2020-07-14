@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const Users = require("./users-model")
 const restrict = require("../middleware/restrict")
-// require("dotenv").config(); // for reading JWT_SECRET from .env file
+require("dotenv").config(); // for reading JWT_SECRET from .env file
 
 function logError(err) {
   console.log("Error: ", err)
@@ -41,8 +41,40 @@ router.post('/register', async (req, res) => {
   }
 })
 
-router.post('/login', (req, res) => {
-  
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body
+    const user = await Users.findBy({username}).first()
+
+    if (!user) {
+      return res.status(401).json({
+        message: "invalid credentials"
+      })
+    }
+
+    const validPassword = await bcrypt.compareSync(password, user.password)
+
+    if (!validPassword) {
+      return res.status(401).json({
+        message: "invalid credentials"
+      })
+    }
+
+    const tokenPayload = {
+      userId: user.id,
+      username: user.username,
+      department: user.department
+    }
+
+    res.cookie("token", jwt.sign(tokenPayload, process.env.JWT_SECRET))
+    res.json({
+      message: `Welcome ${user.username}`
+    })
+
+
+  } catch (err) {
+    logError(err)
+  }
 })
 
 

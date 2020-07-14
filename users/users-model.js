@@ -9,12 +9,18 @@ function addUser(user) {
 }
 
 function findBy(filter) {
-  return db('users')
+  return db("users")
     .where(filter)
+}
+
+function findById(id) {
+  return db("users")
+    .where({ id })
 }
 
 module.exports = {
   getUsers,
   addUser,
-  findBy
+  findBy,
+  findById
 }
