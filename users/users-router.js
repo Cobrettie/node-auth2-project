@@ -23,7 +23,7 @@ function logError(err) {
 
 
 // Get users by department
-router.get('/users', async (req, res) => {
+router.get('/users', restrict(), async (req, res) => {
   try {
     const { department } = req.body
     const users = await Users.getUsersByDepartment(department)
@@ -32,7 +32,6 @@ router.get('/users', async (req, res) => {
     logError(err)
   }
 })
-
 
 
 router.post('/register', async (req, res) => {
@@ -57,6 +56,7 @@ router.post('/register', async (req, res) => {
     logError(err)
   }
 })
+
 
 router.post('/login', async (req, res) => {
   try {
@@ -93,7 +93,6 @@ router.post('/login', async (req, res) => {
     logError(err)
   }
 })
-
 
 
 module.exports = router
