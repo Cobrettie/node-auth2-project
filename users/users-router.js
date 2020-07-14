@@ -9,14 +9,31 @@ function logError(err) {
   console.log("You shall not pass", err)
 }
 
-router.get('/users', restrict(), async (req, res) => {
+
+// Get all users
+
+// router.get('/users', restrict(), async (req, res) => {
+//   try {
+//     const allUsers = await Users.getUsers()
+//     res.status(401).json(allUsers)
+//   } catch (err) {
+//     logError(err)
+//   }
+// })
+
+
+// Get users by department
+router.get('/users', async (req, res) => {
   try {
-    const allUsers = await Users.getUsers()
-    res.status(401).json(allUsers)
-  } catch (err) {
+    const { department } = req.body
+    const users = await Users.getUsersByDepartment(department)
+    res.status(401).json(users)
+  } catch(err) {
     logError(err)
   }
 })
+
+
 
 router.post('/register', async (req, res) => {
   try {
@@ -36,7 +53,7 @@ router.post('/register', async (req, res) => {
     })
     res.status(401).json(newUser)
 
-  } catch (err) {
+  } catch(err) {
     logError(err)
   }
 })
@@ -72,7 +89,7 @@ router.post('/login', async (req, res) => {
     })
 
 
-  } catch (err) {
+  } catch(err) {
     logError(err)
   }
 })
