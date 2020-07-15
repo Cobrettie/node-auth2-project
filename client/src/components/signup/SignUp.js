@@ -21,7 +21,7 @@ export default function SignUp() {
     await axios.post('http://localhost:5000/register', credentials)
       .then(response => {
         if (response) {
-          document.location = 'http://localhost:3000/login'
+          document.location = 'http://localhost:3000/signin'
         } else {
           return <h2>sorry</h2>
         }

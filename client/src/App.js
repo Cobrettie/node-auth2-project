@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import NavMenu from './components/NavMenu/NavMenu.js'
 import SignUp from './components/signup/SignUp.js'
+import SignIn from './components/signin/SignIn.js'
 import './App.css';
 
 function App() {
@@ -14,10 +15,10 @@ function App() {
         <Route path='/signup'>
           <SignUp />
         </Route>
-        {/* <Route path='/signin'>
+        <Route path='/signin'>
           <SignIn />
         </Route>
-        <Route path='/users'>
+        {/*<Route path='/users'>
           <UserList />
         </Route> */}
       </Switch>

@@ -6,6 +6,7 @@ export default function NavMenu() {
     <div>
       <nav>
         <Link to='/signup'>sign up</Link>
+        <Link to='/signin'>sign in</Link>
       </nav>
     </div>
   )
