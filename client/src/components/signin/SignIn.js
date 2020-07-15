@@ -4,8 +4,7 @@ import axios from 'axios'
 export default function SignIn() {
   const [credentials, setCredentials] = useState({
     username: '',
-    password: '',
-    department: ''
+    password: ''
   })
 
   function onChange(event) {
@@ -15,16 +14,14 @@ export default function SignIn() {
     })
   }
 
-  async function onSubmit(event) {
+  function onSubmit(event) {
     event.preventDefault();
 
-    await axios.post('http://localhost:5000/login', credentials)
+    axios.post('http://localhost:5000/login', credentials)
       .then(response => {
-        if (response) {
-          document.location = 'http://localhost:3000/users'
-        } else {
-          return <h2>sorry</h2>
-        }
+        console.log(response)
+        localStorage.setItem("token", response.data.token)
+        document.location = 'http://localhost:3000/users'
       })
       .catch(err => {
         console.log(err)
@@ -49,13 +46,6 @@ export default function SignIn() {
             onChange={onChange}
             value={credentials.password}
             placeholder='password'
-          />
-
-          <input 
-            type='text'
-            name='department'
-            onChange={onChange}
-            placeholder='department'
           />
 
           <button type='submit'>Submit</button>

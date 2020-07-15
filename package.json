@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "## Topics",
   "main": "index.js",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon -r dotenv/config index.js",
@@ -32,5 +33,5 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.4"
-  }
+  },
 }

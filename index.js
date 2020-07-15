@@ -14,6 +14,7 @@ server.use(cors())
 server.use(express.json())
 server.use(cookieParser())
 
+server.use(usersRouter)
 server.use((err, req, res, next) => {
 	console.log(err)
 	
@@ -22,13 +23,12 @@ server.use((err, req, res, next) => {
 	})
 })
 
-server.use(usersRouter)
 
-server.get('/', (req, res) => {
-  res.status(201).json({
-    message: "server running my friend"
-  })
-})
+// server.get('/', (req, res) => {
+//   res.status(201).json({
+//     message: "server running my friend"
+//   })
+// })
 
 server.listen(port, () => {
   console.log(`Server running at localhost ${port}`)
